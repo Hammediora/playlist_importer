@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(del:*)",
+      "Bash(rm:*)",
+      "Bash(pip install:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(touch:*)",
+      "Bash(npm install)",
+      "Bash(venvScripts:*)",
+      "Bash(.venvScriptsactivate.bat)",
+      "Bash(venv/Scripts/pip install:*)",
+      "Bash(venv/Scripts/python:*)"
+    ],
+    "deny": []
+  }
+}

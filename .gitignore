@@ -116,6 +116,9 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+env.example/
+.env.example
+
 
 # Spyder project settings
 .spyderproject
@@ -188,6 +191,8 @@ spotify_credentials.json
 .env.development.local
 .env.test.local
 .env.production.local
+.env.envexample
+.env
 
 # YouTube Music API files
 ytmusic_auth.json
