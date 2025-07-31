@@ -118,6 +118,8 @@ env.bak/
 venv.bak/
 env.example/
 .env.example
+credentials/
+
 
 
 # Spyder project settings
