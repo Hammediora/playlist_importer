@@ -20,9 +20,8 @@ SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
 SPOTIFY_REDIRECT_URI = os.getenv("SPOTIFY_REDIRECT_URI", "http://127.0.0.1:3000/callback")
 
-# YouTube API configuration
-YOUTUBE_CREDENTIALS_FILE = CREDENTIALS_DIR / "youtube_credentials.json"
-YOUTUBE_TOKEN_FILE = CREDENTIALS_DIR / "youtube_token.pickle"
+# YouTube Music configuration (using ytmusicapi - no quota limits)
+YOUTUBE_MUSIC_OAUTH_FILE = "ytmusic_oauth.json"
 
 # Database configuration
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///playlist_importer.db")

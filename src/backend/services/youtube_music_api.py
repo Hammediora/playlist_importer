@@ -1,51 +1,40 @@
 """
-YouTube Music API Client using ytmusicapi
-No quota limits - uses YouTube Music web interface directly
+YouTube Music API Client using ytmusicapi (linsomniac approach)
+No quota limits - uses YouTube Music web interface directly with OAuth authentication
 """
 
 import os
 import json
 from typing import List, Dict, Optional, Tuple
 from ytmusicapi import YTMusic
+from pathlib import Path
 
 class YouTubeMusicAPIClient:
     """YouTube Music client using ytmusicapi (no quota limits)"""
     
-    def __init__(self, auth_headers_file: str = None):
-        # Import settings here to avoid circular imports
-        import sys
-        import os
-        from pathlib import Path
-        
-        # Add the backend directory to Python path
-        backend_dir = Path(__file__).parent.parent
-        if str(backend_dir) not in sys.path:
-            sys.path.append(str(backend_dir))
-        
-        from config.settings import YOUTUBE_CREDENTIALS_FILE
-        
-        self.auth_headers_file = auth_headers_file or str(YOUTUBE_CREDENTIALS_FILE).replace('.json', '_headers.json')
+    def __init__(self, oauth_file: str = None):
+        """Initialize YouTube Music client with OAuth file (like linsomniac approach)"""
+        self.oauth_file = oauth_file or "ytmusic_oauth.json"
         self.ytmusic = None
         self.authenticated = False
         
     def authenticate(self) -> bool:
-        """Authenticate with YouTube Music using headers"""
+        """Authenticate with YouTube Music using OAuth file (linsomniac approach)"""
         try:
-            if os.path.exists(self.auth_headers_file):
-                with open(self.auth_headers_file, 'r') as f:
-                    headers = json.load(f)
-                
-                self.ytmusic = YTMusic(headers=headers)
-                self.authenticated = True
-                print("✅ YouTube Music authenticated with headers")
-                return True
-            else:
-                print(f"❌ Headers file not found: {self.auth_headers_file}")
-                print("Please run the setup script to generate headers")
+            if not os.path.exists(self.oauth_file):
+                print(f"❌ OAuth file not found: {self.oauth_file}")
+                print("Please run setup_ytmusic_oauth.py to create the OAuth file")
                 return False
+            
+            # Initialize YTMusic with OAuth file (like linsomniac does)
+            self.ytmusic = YTMusic(self.oauth_file)
+            self.authenticated = True
+            print(f"✅ YouTube Music authenticated with OAuth file: {self.oauth_file}")
+            return True
                 
         except Exception as e:
             print(f"YouTube Music authentication failed: {e}")
+            print("Try running setup_ytmusic_oauth.py to create a fresh OAuth file")
             self.authenticated = False
             return False
     
@@ -124,5 +113,6 @@ class YouTubeMusicAPIClient:
         return {
             "authenticated": self.authenticated,
             "service_available": self.ytmusic is not None,
-            "headers_file_exists": os.path.exists(self.auth_headers_file)
+            "oauth_file_exists": os.path.exists(self.oauth_file),
+            "oauth_file_path": self.oauth_file
         } 

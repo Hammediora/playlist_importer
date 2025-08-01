@@ -32,6 +32,16 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# Backup and temporary files
+*_backup.*
+*_test.*
+*_old.*
+*_temp.*
+*.bak
+*.tmp
+.history/
+.claude/
+
 # PyInstaller
 *.manifest
 *.spec
@@ -118,7 +128,7 @@ env.bak/
 venv.bak/
 env.example/
 .env.example
-credentials/
+.credentials
 
 
 
@@ -166,6 +176,7 @@ cython_debug/
 .DS_Store
 *.pem
 .history
+.credentials
 
 # Debug
 npm-debug.log*
