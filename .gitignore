@@ -280,3 +280,6 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
+credentials/
+*.pickle
+*_credentials.json
